@@ -144,9 +144,7 @@ function nch_gate_lessons_block( $block_content, $block ) {
 		if ( ! str_contains( $classes, 'nch-lessons' ) ) return $block_content;
 		if ( nch_cursos_has_access() ) return $block_content;
 
-		$pms_settings  = get_option( 'pms_general_settings', [] );
-		$register_id   = $pms_settings['register_page'] ?? 0;
-		$checkout_url  = $register_id ? get_permalink( $register_id ) : home_url( '/login/' );
+		$checkout_url = home_url( '/suscripcion/' );
 
 		$cta = sprintf(
 			'<div class="nch-lessons__cta">
