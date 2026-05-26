@@ -56,11 +56,11 @@
 		<div class="wp-block-group nch-auth-panel" id="nch-panel-login">
 
 			<!-- wp:shortcode -->
-			[pms-login]
+			[wp_login_form]
 			<!-- /wp:shortcode -->
 
 			<!-- wp:paragraph {"align":"center","fontSize":"small","className":"nch-auth-footer"} -->
-			<p class="has-text-align-center has-small-font-size nch-auth-footer"><a href="#" class="nch-tab-switch" data-target="nch-panel-register">Crear cuenta</a></p>
+			<p class="has-text-align-center has-small-font-size nch-auth-footer"><a href="/wp-login.php?action=lostpassword">¿Olvidaste tu contraseña?</a> · <a href="#" class="nch-tab-switch" data-target="nch-panel-register">Crear cuenta</a></p>
 			<!-- /wp:paragraph -->
 
 		</div>
@@ -70,9 +70,16 @@
 		<!-- wp:group {"anchor":"nch-panel-register","className":"nch-auth-panel nch-auth-panel--hidden","layout":{"type":"constrained"}} -->
 		<div class="wp-block-group nch-auth-panel nch-auth-panel--hidden" id="nch-panel-register">
 
-			<!-- wp:shortcode -->
-			[pms-register subscription_plans="15"]
-			<!-- /wp:shortcode -->
+			<!-- wp:html -->
+			<form class="nch-auth-form" method="post" action="/wp-login.php?action=register">
+				<label for="nch-reg-user">Nombre de usuario</label>
+				<input type="text" id="nch-reg-user" name="user_login" required placeholder="tunombre">
+				<label for="nch-reg-email">Email</label>
+				<input type="email" id="nch-reg-email" name="user_email" required placeholder="tu@email.com">
+				<p class="nch-auth-hint">Recibirás tu contraseña por email.</p>
+				<button type="submit" class="nch-auth-submit">Crear Cuenta</button>
+			</form>
+			<!-- /wp:html -->
 
 			<!-- wp:paragraph {"align":"center","fontSize":"small","className":"nch-auth-footer"} -->
 			<p class="has-text-align-center has-small-font-size nch-auth-footer">¿Ya tienes cuenta? <a href="#" class="nch-tab-switch" data-target="nch-panel-login">Inicia sesión</a></p>
