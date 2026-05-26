@@ -1,0 +1,75 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"align":"full","backgroundColor":"base","className":"nch-section","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull has-base-background-color has-background nch-section">
+
+	<!-- wp:paragraph {"textColor":"primary","className":"nch-label"} -->
+	<p class="has-primary-color has-text-color nch-label">Escuela de Música</p>
+	<!-- /wp:paragraph -->
+
+	<!-- wp:heading {"level":1,"textColor":"contrast","fontSize":"xx-large"} -->
+	<h1 class="wp-block-heading has-contrast-color has-text-color has-xx-large-font-size">Todos los Cursos</h1>
+	<!-- /wp:heading -->
+
+	<!-- wp:html -->
+	<div class="nch-courses-search-wrapper">
+		<input
+			type="text"
+			id="nch-courses-search"
+			class="nch-courses-search"
+			placeholder="Buscar cursos por nombre..."
+			autocomplete="off"
+		>
+	</div>
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		var input = document.getElementById('nch-courses-search');
+		if (!input) return;
+		input.addEventListener('input', function () {
+			var q = this.value.toLowerCase().trim();
+			document.querySelectorAll('.nch-course-card').forEach(function (card) {
+				var title = card.querySelector('.wp-block-post-title');
+				var text  = title ? title.textContent.toLowerCase() : '';
+				card.closest('li').style.display = (!q || text.includes(q)) ? '' : 'none';
+			});
+		});
+	});
+	</script>
+	<!-- /wp:html -->
+
+	<!-- wp:query {"query":{"inherit":true},"layout":{"type":"constrained"}} -->
+	<div class="wp-block-query">
+
+		<!-- wp:post-template {"layout":{"type":"grid","columnCount":3},"className":"nch-courses-grid"} -->
+
+			<!-- wp:group {"className":"nch-course-card","layout":{"type":"constrained"}} -->
+			<div class="wp-block-group nch-course-card">
+
+				<!-- wp:post-featured-image {"isLink":true,"aspectRatio":"16/9","className":"nch-course-card__image"} /-->
+
+				<!-- wp:group {"className":"nch-course-card__body","layout":{"type":"constrained"}} -->
+				<div class="wp-block-group nch-course-card__body">
+
+					<!-- wp:post-title {"isLink":true,"textColor":"contrast","fontSize":"medium","level":3} /-->
+
+				</div>
+				<!-- /wp:group -->
+
+			</div>
+			<!-- /wp:group -->
+
+		<!-- /wp:post-template -->
+
+		<!-- wp:query-no-results -->
+		<!-- wp:paragraph {"textColor":"secondary","align":"center"} -->
+		<p class="has-text-align-center has-secondary-color has-text-color">No se encontraron cursos.</p>
+		<!-- /wp:paragraph -->
+		<!-- /wp:query-no-results -->
+
+	</div>
+	<!-- /wp:query -->
+
+</div>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

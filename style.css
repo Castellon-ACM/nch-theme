@@ -431,6 +431,96 @@ body {
 	height: 100%;
 }
 
+/* === Cursos Archive === */
+
+.nch-courses-search-wrapper {
+	margin-bottom: 2.5rem;
+}
+
+.nch-courses-search {
+	width: 100%;
+	background: var(--wp--preset--color--base-2);
+	border: 1px solid var(--wp--preset--color--base-3);
+	border-radius: 6px;
+	padding: 0.85rem 1.25rem;
+	color: var(--wp--preset--color--contrast);
+	font-size: 1rem;
+	box-sizing: border-box;
+	transition: border-color 0.2s ease;
+}
+
+.nch-courses-search:focus {
+	outline: none;
+	border-color: var(--wp--preset--color--primary);
+}
+
+.nch-courses-search::placeholder {
+	color: var(--wp--preset--color--secondary);
+}
+
+/* Grid */
+.nch-courses-grid.wp-block-post-template {
+	gap: 1.5rem;
+}
+
+/* Card */
+.nch-course-card {
+	background: var(--wp--preset--color--base-2);
+	border: 1px solid var(--wp--preset--color--base-3);
+	border-radius: 8px;
+	overflow: hidden;
+	transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.nch-course-card:hover {
+	border-color: var(--wp--preset--color--primary);
+	transform: translateY(-3px);
+}
+
+.nch-course-card__image .wp-block-post-featured-image {
+	margin: 0;
+}
+
+.nch-course-card__image .wp-block-post-featured-image img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+}
+
+.nch-course-card__image .wp-block-post-featured-image a {
+	display: block;
+}
+
+/* Placeholder si no hay imagen */
+.nch-course-card__image .wp-block-post-featured-image:empty::before {
+	content: '';
+	display: block;
+	aspect-ratio: 16 / 9;
+	background: var(--wp--preset--color--base-3);
+}
+
+.nch-course-card__body {
+	padding: 1.25rem;
+}
+
+.nch-course-card__body .wp-block-post-title {
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1.3;
+	margin: 0;
+}
+
+.nch-course-card__body .wp-block-post-title a {
+	color: var(--wp--preset--color--contrast);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.nch-course-card__body .wp-block-post-title a:hover {
+	color: var(--wp--preset--color--primary);
+}
+
 /* === Welcome Header === */
 
 .nch-welcome-header {

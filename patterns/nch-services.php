@@ -90,7 +90,7 @@
 				<!-- wp:buttons -->
 				<div class="wp-block-buttons">
 					<!-- wp:button {"className":"is-style-outline nch-btn-outline nch-btn-outline--school","textColor":"primary","width":100} -->
-					<div class="wp-block-button is-style-outline nch-btn-outline nch-btn-outline--school has-custom-width wp-block-button__width-100"><a class="wp-block-button__link has-primary-color has-text-color wp-element-button" href="/escuela-musica">Ver Cursos →</a></div>
+					<div class="wp-block-button is-style-outline nch-btn-outline nch-btn-outline--school has-custom-width wp-block-button__width-100"><a class="wp-block-button__link has-primary-color has-text-color wp-element-button" href="/cursos">Ver Cursos →</a></div>
 					<!-- /wp:button -->
 				</div>
 				<!-- /wp:buttons -->
