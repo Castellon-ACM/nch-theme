@@ -333,6 +333,165 @@ body {
 	margin-bottom: 1.5rem;
 }
 
+/* === Curso Acordeón === */
+
+.nch-accordion {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	border: 1px solid var(--wp--preset--color--base-3);
+	border-radius: 8px;
+	overflow: hidden;
+	margin-top: 2rem;
+}
+
+.nch-accordion__item {
+	border-bottom: 1px solid var(--wp--preset--color--base-3);
+}
+
+.nch-accordion__item:last-child {
+	border-bottom: none;
+}
+
+.nch-accordion__header {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	width: 100%;
+	padding: 1.25rem 1.5rem;
+	background: var(--wp--preset--color--base-2);
+	cursor: pointer;
+	text-align: left;
+	transition: background 0.2s ease;
+}
+
+.nch-accordion__item--open > .nch-accordion__header {
+	background: var(--wp--preset--color--base-3);
+}
+
+.nch-accordion__item--locked > .nch-accordion__header {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+.nch-accordion__icon {
+	width: 1.5rem;
+	flex-shrink: 0;
+	font-size: 0.9rem;
+	color: var(--wp--preset--color--primary);
+}
+
+.nch-accordion__item--done > .nch-accordion__header .nch-accordion__icon {
+	color: var(--wp--preset--color--primary);
+	font-weight: 700;
+}
+
+.nch-accordion__number {
+	font-size: 0.72rem;
+	font-weight: 700;
+	color: var(--wp--preset--color--secondary);
+	letter-spacing: 0.1em;
+	flex-shrink: 0;
+}
+
+.nch-accordion__title {
+	flex: 1;
+	font-size: 0.95rem;
+	font-weight: 600;
+	color: var(--wp--preset--color--contrast);
+}
+
+.nch-accordion__item--done > .nch-accordion__header .nch-accordion__title {
+	text-decoration: line-through;
+	color: var(--wp--preset--color--secondary);
+}
+
+.nch-accordion__chevron {
+	width: 1rem;
+	height: 1rem;
+	flex-shrink: 0;
+	position: relative;
+}
+
+.nch-accordion__chevron::before,
+.nch-accordion__chevron::after {
+	content: '';
+	position: absolute;
+	width: 8px;
+	height: 2px;
+	background: var(--wp--preset--color--secondary);
+	top: 50%;
+	transition: transform 0.25s ease;
+}
+
+.nch-accordion__chevron::before {
+	left: 0;
+	transform: translateY(-50%) rotate(45deg);
+}
+
+.nch-accordion__chevron::after {
+	right: 0;
+	transform: translateY(-50%) rotate(-45deg);
+}
+
+.nch-accordion__chevron--open::before {
+	transform: translateY(-50%) rotate(-45deg);
+}
+
+.nch-accordion__chevron--open::after {
+	transform: translateY(-50%) rotate(45deg);
+}
+
+/* Accordion body — CSS grid animation */
+.nch-accordion__body {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nch-accordion__item--open > .nch-accordion__body {
+	grid-template-rows: 1fr;
+}
+
+.nch-accordion__body-inner {
+	overflow: hidden;
+	padding: 0 1.5rem;
+	transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nch-accordion__item--open > .nch-accordion__body > .nch-accordion__body-inner {
+	padding: 1.5rem;
+}
+
+/* Video wrapper 16:9 */
+.nch-video-wrapper {
+	position: relative;
+	width: 100%;
+	padding-bottom: 56.25%;
+	background: #000;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.nch-video-wrapper iframe,
+.nch-video-wrapper video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* Hint */
+.nch-accordion__hint {
+	margin-top: 1rem;
+	font-size: 0.8rem;
+	color: var(--wp--preset--color--secondary);
+	text-align: center;
+	padding: 0.6rem 1rem;
+	border: 1px solid var(--wp--preset--color--base-3);
+	border-radius: 4px;
+}
+
 /* === Welcome Header === */
 
 .nch-welcome-header {
