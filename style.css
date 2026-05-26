@@ -47,11 +47,11 @@ body {
 /* === Sections === */
 
 .nch-section {
-	padding: 5rem 1.5rem;
+	padding: 2rem 1.5rem;
 }
 
 .nch-section--hero {
-	padding: 8rem 1.5rem 6rem;
+	padding: 3rem 1.5rem;
 	position: relative;
 	overflow: hidden;
 }
