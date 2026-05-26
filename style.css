@@ -333,6 +333,208 @@ body {
 	margin-bottom: 1.5rem;
 }
 
+/* === Auth Page === */
+
+.nch-auth-page {
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+	padding: 2rem;
+}
+
+.nch-auth-card {
+	width: 100%;
+	max-width: 480px;
+	border: 1px solid var(--wp--preset--color--base-3);
+	border-radius: 12px;
+	padding: 2.5rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.nch-auth-logo {
+	text-align: center;
+	margin-bottom: 0.5rem;
+}
+
+.nch-auth-logo a,
+.nch-auth-logo span {
+	font-size: 1.5rem;
+	font-weight: 900;
+	color: var(--wp--preset--color--primary);
+	text-decoration: none;
+	letter-spacing: -0.03em;
+}
+
+.nch-auth-tagline {
+	text-align: center;
+	color: var(--wp--preset--color--secondary);
+	font-size: 0.8rem;
+	margin-bottom: 2rem;
+}
+
+/* Tabs nav */
+.nch-auth-tab-nav {
+	display: flex;
+	border-bottom: 1px solid var(--wp--preset--color--base-3);
+	margin-bottom: 2rem;
+}
+
+.nch-auth-tab-btn {
+	flex: 1;
+	background: none;
+	border: none;
+	border-bottom: 2px solid transparent;
+	margin-bottom: -1px;
+	padding: 0.75rem;
+	color: var(--wp--preset--color--secondary);
+	font-size: 0.78rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	cursor: pointer;
+	transition: color 0.2s, border-color 0.2s;
+}
+
+.nch-auth-tab-btn.nch-active {
+	color: var(--wp--preset--color--primary);
+	border-bottom-color: var(--wp--preset--color--primary);
+}
+
+/* Panels */
+.nch-auth-panel--hidden {
+	display: none;
+}
+
+/* Login form — shortcode output */
+.nch-auth-panel .login p {
+	margin-bottom: 1.25rem;
+}
+
+.nch-auth-panel .login label {
+	display: block;
+	color: var(--wp--preset--color--secondary);
+	font-size: 0.72rem;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	margin-bottom: 0.4rem;
+}
+
+.nch-auth-panel .login input[type="text"],
+.nch-auth-panel .login input[type="password"] {
+	width: 100%;
+	background: var(--wp--preset--color--base-3);
+	border: 1px solid #2a2a2a;
+	border-radius: 4px;
+	padding: 0.75rem 1rem;
+	color: var(--wp--preset--color--contrast);
+	font-size: 0.95rem;
+	box-sizing: border-box;
+	transition: border-color 0.2s;
+}
+
+.nch-auth-panel .login input[type="text"]:focus,
+.nch-auth-panel .login input[type="password"]:focus {
+	border-color: var(--wp--preset--color--primary);
+	outline: none;
+}
+
+.nch-auth-panel .login .button-primary,
+.nch-auth-panel .login input[type="submit"] {
+	width: 100%;
+	background: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--base);
+	border: none;
+	border-radius: 4px;
+	padding: 0.85rem;
+	font-weight: 700;
+	font-size: 0.85rem;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	cursor: pointer;
+	transition: opacity 0.2s;
+}
+
+.nch-auth-panel .login .button-primary:hover,
+.nch-auth-panel .login input[type="submit"]:hover {
+	opacity: 0.85;
+}
+
+.nch-auth-panel .login .forgetmenot {
+	display: none;
+}
+
+/* Register form */
+.nch-auth-form label {
+	display: block;
+	color: var(--wp--preset--color--secondary);
+	font-size: 0.72rem;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	margin-bottom: 0.4rem;
+}
+
+.nch-auth-form input[type="text"],
+.nch-auth-form input[type="email"] {
+	width: 100%;
+	background: var(--wp--preset--color--base-3);
+	border: 1px solid #2a2a2a;
+	border-radius: 4px;
+	padding: 0.75rem 1rem;
+	color: var(--wp--preset--color--contrast);
+	font-size: 0.95rem;
+	box-sizing: border-box;
+	margin-bottom: 1.25rem;
+	transition: border-color 0.2s;
+}
+
+.nch-auth-form input:focus {
+	border-color: var(--wp--preset--color--primary);
+	outline: none;
+}
+
+.nch-auth-hint {
+	font-size: 0.78rem;
+	color: var(--wp--preset--color--secondary);
+	margin-bottom: 1.25rem;
+	line-height: 1.5;
+}
+
+.nch-auth-submit {
+	width: 100%;
+	background: var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--base);
+	border: none;
+	border-radius: 4px;
+	padding: 0.85rem;
+	font-weight: 700;
+	font-size: 0.85rem;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	cursor: pointer;
+	transition: opacity 0.2s;
+}
+
+.nch-auth-submit:hover {
+	opacity: 0.85;
+}
+
+.nch-auth-footer {
+	text-align: center;
+	margin-top: 1.5rem;
+	font-size: 0.82rem;
+	color: var(--wp--preset--color--secondary);
+}
+
+.nch-auth-footer a {
+	color: var(--wp--preset--color--primary);
+	text-decoration: none;
+}
+
+.nch-auth-footer a:hover {
+	text-decoration: underline;
+}
+
 /* === Divider === */
 
 .nch-divider {
