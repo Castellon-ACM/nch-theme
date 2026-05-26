@@ -56,6 +56,12 @@ body {
 	overflow: hidden;
 }
 
+.wp-site-blocks > *,
+.is-layout-constrained > *,
+.is-layout-flow > * {
+	margin-block-start: 0;
+}
+
 .nch-section--hero::before {
 	content: '';
 	position: absolute;
