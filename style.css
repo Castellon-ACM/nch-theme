@@ -333,6 +333,78 @@ body {
 	margin-bottom: 1.5rem;
 }
 
+/* === Welcome Header === */
+
+.nch-welcome-header {
+	padding: 5rem 1.5rem 3rem;
+}
+
+.nch-welcome-header__sub {
+	margin-top: 1rem;
+}
+
+/* === Service Cards === */
+
+.nch-service-card {
+	border: 1px solid var(--wp--preset--color--base-3);
+	border-radius: 12px;
+	padding: 2.5rem;
+	height: 100%;
+	transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.nch-service-card:hover {
+	transform: translateY(-4px);
+}
+
+.nch-service-card--sales {
+	border-color: var(--wp--preset--color--base-3);
+}
+
+.nch-service-card--sales:hover {
+	border-color: var(--wp--preset--color--primary);
+}
+
+.nch-service-card--school:hover {
+	border-color: var(--wp--preset--color--contrast);
+}
+
+.nch-service-card__icon {
+	font-size: 3rem;
+	line-height: 1;
+	margin-bottom: 1.5rem;
+}
+
+.nch-service-card__features.wp-block-list {
+	list-style: none;
+	padding: 0;
+	margin: 1.5rem 0 2rem;
+}
+
+.nch-service-card__features.wp-block-list li {
+	padding: 0.6rem 0;
+	border-bottom: 1px solid var(--wp--preset--color--base-3);
+}
+
+.nch-service-card__features.wp-block-list li:last-child {
+	border-bottom: none;
+}
+
+.nch-service-card__features.wp-block-list li::before {
+	content: '✓ ';
+	color: var(--wp--preset--color--primary);
+	font-weight: 700;
+}
+
+.nch-btn-outline--school .wp-block-button__link {
+	border-color: var(--wp--preset--color--base-3) !important;
+	transition: border-color 0.2s ease;
+}
+
+.nch-btn-outline--school .wp-block-button__link:hover {
+	border-color: var(--wp--preset--color--primary) !important;
+}
+
 /* === Auth Page === */
 
 .nch-auth-page {
