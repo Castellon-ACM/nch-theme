@@ -464,6 +464,30 @@ body {
 	display: none;
 }
 
+/* Oculta labels nativos y los reemplaza */
+.nch-auth-panel .login #user_login_label,
+.nch-auth-panel .login label[for="user_login"] {
+	font-size: 0;
+	letter-spacing: 0;
+}
+.nch-auth-panel .login label[for="user_login"]::before {
+	content: 'EMAIL O USUARIO';
+	font-size: 0.72rem;
+	letter-spacing: 0.12em;
+	color: var(--wp--preset--color--secondary);
+}
+.nch-auth-panel .login label[for="user_pass"]::before {
+	content: 'CONTRASEÑA';
+	font-size: 0.72rem;
+	letter-spacing: 0.12em;
+	color: var(--wp--preset--color--secondary);
+}
+.nch-auth-panel .login #user_pass_label,
+.nch-auth-panel .login label[for="user_pass"] {
+	font-size: 0;
+	letter-spacing: 0;
+}
+
 /* Register form */
 .nch-auth-form label {
 	display: block;

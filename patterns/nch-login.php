@@ -56,7 +56,7 @@
 		<div class="wp-block-group nch-auth-panel" id="nch-panel-login">
 
 			<!-- wp:shortcode -->
-			[wp_login_form redirect="" label_username="Email o usuario" label_password="Contraseña" label_log_in="Iniciar Sesión" label_remember="Recordarme"]
+			[wp_login_form]
 			<!-- /wp:shortcode -->
 
 			<!-- wp:paragraph {"align":"center","fontSize":"small","className":"nch-auth-footer"} -->
