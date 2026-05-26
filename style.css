@@ -345,6 +345,20 @@ body {
 
 /* === Service Cards === */
 
+.nch-services-grid {
+	gap: 1.5rem;
+	align-items: stretch;
+}
+
+.nch-services-grid .wp-block-column {
+	display: flex;
+	flex-direction: column;
+}
+
+.nch-services-grid .wp-block-column > .nch-service-card {
+	flex: 1;
+}
+
 .nch-service-card {
 	border: 1px solid var(--wp--preset--color--base-3);
 	border-radius: 12px;
