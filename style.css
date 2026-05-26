@@ -14,11 +14,34 @@ Text Domain: nch-theme
 Tags: block-themes, full-site-editing, music, dark
 */
 
+/* === Header / Footer === */
+
+.nch-header {
+	padding: 1rem 1.5rem;
+	border-bottom: 1px solid var(--wp--preset--color--base-3);
+	position: sticky;
+	top: 0;
+	z-index: 100;
+}
+
+.nch-footer {
+	padding: 2rem 1.5rem;
+	border-top: 1px solid var(--wp--preset--color--base-3);
+}
+
 /* === Global === */
 
+html,
 body {
+	background-color: #0a0a0a;
 	background-color: var(--wp--preset--color--base);
+	color: #f0f0f0;
 	color: var(--wp--preset--color--contrast);
+}
+
+.wp-site-blocks {
+	background-color: #0a0a0a;
+	background-color: var(--wp--preset--color--base);
 }
 
 /* === Sections === */
