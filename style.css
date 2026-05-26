@@ -888,3 +888,183 @@ body {
 	border-top: 1px solid var(--wp--preset--color--base-3);
 	margin: 0;
 }
+
+/* === Suscripción — Página de plan === */
+
+.nch-sub-layout {
+	margin-top: 3rem;
+	align-items: flex-start;
+}
+
+/* Tarjeta plan */
+.nch-plan-card {
+	border: 1px solid var(--wp--preset--color--base-3);
+	border-radius: 12px;
+	padding: 2rem !important;
+	position: sticky;
+	top: 2rem;
+}
+
+.nch-plan-name {
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	font-weight: 700;
+	margin: 0 0 0.5rem;
+}
+
+.nch-plan-price {
+	margin: 0 0 0.75rem !important;
+	line-height: 1;
+}
+
+.nch-plan-period {
+	font-size: 1rem;
+	font-weight: 400;
+	color: var(--wp--preset--color--secondary);
+}
+
+.nch-plan-divider {
+	margin: 1.5rem 0 !important;
+	opacity: 1 !important;
+}
+
+.nch-plan-features {
+	list-style: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.nch-plan-features li {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	font-size: 0.9rem;
+}
+
+.nch-plan-features li::before {
+	content: '✓';
+	color: var(--wp--preset--color--primary);
+	font-weight: 700;
+	font-size: 0.85rem;
+	flex-shrink: 0;
+}
+
+/* Tarjeta formulario */
+.nch-sub-form-card {
+	border: 1px solid var(--wp--preset--color--base-3);
+	border-radius: 12px;
+	padding: 2rem !important;
+}
+
+.nch-sub-form-title {
+	margin: 0 0 1.5rem !important;
+}
+
+/* Estilos PMS register form dentro de nch-sub-form-card */
+.nch-sub-form-card .pms-form,
+.nch-sub-form-card form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.nch-sub-form-card .pms-form label,
+.nch-sub-form-card form label {
+	display: block;
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: var(--wp--preset--color--secondary);
+	margin-bottom: 0.3rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.nch-sub-form-card .pms-form input[type="text"],
+.nch-sub-form-card .pms-form input[type="email"],
+.nch-sub-form-card .pms-form input[type="password"],
+.nch-sub-form-card form input[type="text"],
+.nch-sub-form-card form input[type="email"],
+.nch-sub-form-card form input[type="password"] {
+	width: 100%;
+	padding: 0.75rem 1rem;
+	background: var(--wp--preset--color--base-3);
+	border: 1px solid transparent;
+	border-radius: 6px;
+	color: var(--wp--preset--color--contrast);
+	font-size: 0.95rem;
+	transition: border-color 0.2s ease;
+	box-sizing: border-box;
+}
+
+.nch-sub-form-card .pms-form input:focus,
+.nch-sub-form-card form input:focus {
+	outline: none;
+	border-color: var(--wp--preset--color--primary);
+}
+
+.nch-sub-form-card .pms-form .pms-field,
+.nch-sub-form-card .pms-form fieldset {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+.nch-sub-form-card .pms-subscription-plan-selection {
+	background: var(--wp--preset--color--base-3);
+	border-radius: 8px;
+	padding: 1rem;
+	font-size: 0.9rem;
+}
+
+.nch-sub-form-card input[type="submit"],
+.nch-sub-form-card .pms-form input[type="submit"],
+.nch-sub-form-card button[type="submit"] {
+	width: 100%;
+	padding: 0.85rem;
+	background: var(--wp--preset--color--primary);
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	font-size: 1rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: opacity 0.2s ease;
+	margin-top: 0.5rem;
+}
+
+.nch-sub-form-card input[type="submit"]:hover,
+.nch-sub-form-card button[type="submit"]:hover {
+	opacity: 0.85;
+}
+
+.nch-sub-form-card .pms-errors,
+.nch-sub-form-card .pms-success {
+	padding: 0.75rem 1rem;
+	border-radius: 6px;
+	font-size: 0.875rem;
+}
+
+.nch-sub-form-card .pms-errors {
+	background: rgba(255, 45, 45, 0.12);
+	border: 1px solid var(--wp--preset--color--primary);
+	color: var(--wp--preset--color--primary);
+}
+
+.nch-sub-form-card .pms-success {
+	background: rgba(34, 197, 94, 0.12);
+	border: 1px solid #22c55e;
+	color: #22c55e;
+}
+
+@media (max-width: 768px) {
+	.nch-sub-layout {
+		flex-direction: column;
+	}
+
+	.nch-plan-card {
+		position: static;
+	}
+}

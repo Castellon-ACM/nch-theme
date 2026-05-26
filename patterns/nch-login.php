@@ -71,12 +71,20 @@
 		<div class="wp-block-group nch-auth-panel nch-auth-panel--hidden" id="nch-panel-register">
 
 			<!-- wp:html -->
-			<form class="nch-auth-form" method="post" action="/wp-login.php?action=register">
+			<form class="nch-auth-form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+				<input type="hidden" name="action" value="nch_register">
+				<?php wp_nonce_field( 'nch_register_nonce', 'nch_nonce' ); ?>
+				<?php if ( ! empty( $_GET['nch_error'] ) ) : ?>
+				<p class="nch-auth-error"><?php echo esc_html( urldecode( $_GET['nch_error'] ) ); ?></p>
+				<?php endif; ?>
 				<label for="nch-reg-user">Nombre de usuario</label>
-				<input type="text" id="nch-reg-user" name="user_login" required placeholder="tunombre">
-				<label for="nch-reg-email">Email</label>
-				<input type="email" id="nch-reg-email" name="user_email" required placeholder="tu@email.com">
-				<p class="nch-auth-hint">Recibirás tu contraseña por email.</p>
+				<input type="text" id="nch-reg-user" name="user_login" required placeholder="tunombre" autocomplete="username">
+				<label for="nch-reg-email">Correo electrónico</label>
+				<input type="email" id="nch-reg-email" name="user_email" required placeholder="tu@email.com" autocomplete="email">
+				<label for="nch-reg-pass">Contraseña</label>
+				<input type="password" id="nch-reg-pass" name="user_pass" required placeholder="Mínimo 8 caracteres" minlength="8" autocomplete="new-password">
+				<label for="nch-reg-pass2">Confirmar contraseña</label>
+				<input type="password" id="nch-reg-pass2" name="user_pass_confirm" required placeholder="Repite la contraseña" minlength="8" autocomplete="new-password">
 				<button type="submit" class="nch-auth-submit">Crear Cuenta</button>
 			</form>
 			<!-- /wp:html -->

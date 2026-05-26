@@ -31,6 +31,75 @@ add_action( 'init', function () {
 	register_block_pattern_category( 'nch', [ 'label' => __( 'NCH', 'nch-theme' ) ] );
 } );
 
+add_filter( 'template_include', function ( $template ) {
+	if ( is_page( 'login' ) ) {
+		$custom = get_template_directory() . '/templates/page-login.php';
+		if ( file_exists( $custom ) ) {
+			return $custom;
+		}
+	}
+	return $template;
+} );
+
+/**
+ * Registro nativo con contraseña propia.
+ */
+add_action( 'admin_post_nopriv_nch_register', 'nch_handle_register' );
+function nch_handle_register() {
+	$login_url = home_url( '/login/' );
+
+	if ( ! isset( $_POST['nch_nonce'] ) || ! wp_verify_nonce( $_POST['nch_nonce'], 'nch_register_nonce' ) ) {
+		wp_redirect( add_query_arg( 'nch_error', urlencode( 'Petición no válida.' ), $login_url . '#nch-panel-register' ) );
+		exit;
+	}
+
+	$username = sanitize_user( wp_unslash( $_POST['user_login'] ?? '' ) );
+	$email    = sanitize_email( wp_unslash( $_POST['user_email'] ?? '' ) );
+	$pass     = wp_unslash( $_POST['user_pass'] ?? '' );
+	$pass2    = wp_unslash( $_POST['user_pass_confirm'] ?? '' );
+
+	if ( empty( $username ) || empty( $email ) || empty( $pass ) ) {
+		wp_redirect( add_query_arg( 'nch_error', urlencode( 'Todos los campos son obligatorios.' ), $login_url . '#nch-panel-register' ) );
+		exit;
+	}
+
+	if ( $pass !== $pass2 ) {
+		wp_redirect( add_query_arg( 'nch_error', urlencode( 'Las contraseñas no coinciden.' ), $login_url . '#nch-panel-register' ) );
+		exit;
+	}
+
+	if ( strlen( $pass ) < 8 ) {
+		wp_redirect( add_query_arg( 'nch_error', urlencode( 'La contraseña debe tener al menos 8 caracteres.' ), $login_url . '#nch-panel-register' ) );
+		exit;
+	}
+
+	if ( username_exists( $username ) ) {
+		wp_redirect( add_query_arg( 'nch_error', urlencode( 'Ese nombre de usuario ya existe.' ), $login_url . '#nch-panel-register' ) );
+		exit;
+	}
+
+	if ( email_exists( $email ) ) {
+		wp_redirect( add_query_arg( 'nch_error', urlencode( 'Ese correo ya está registrado.' ), $login_url . '#nch-panel-register' ) );
+		exit;
+	}
+
+	$user_id = wp_insert_user( [
+		'user_login' => $username,
+		'user_email' => $email,
+		'user_pass'  => $pass,
+		'role'       => 'subscriber',
+	] );
+
+	if ( is_wp_error( $user_id ) ) {
+		wp_redirect( add_query_arg( 'nch_error', urlencode( $user_id->get_error_message() ), $login_url . '#nch-panel-register' ) );
+		exit;
+	}
+
+	wp_set_auth_cookie( $user_id, false );
+	wp_redirect( home_url( '/' ) );
+	exit;
+}
+
 /**
  * Gating de lecciones con PMS.
  *
