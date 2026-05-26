@@ -256,6 +256,10 @@ body {
 
 /* === Testimonials === */
 
+.nch-testimonials__heading {
+	margin-bottom: 3rem;
+}
+
 .nch-testimonial {
 	background-color: var(--wp--preset--color--base-2);
 	border: 1px solid var(--wp--preset--color--base-3);

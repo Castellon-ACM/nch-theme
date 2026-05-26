@@ -15,8 +15,8 @@
 	<p class="has-text-align-center has-primary-color has-text-color nch-label">Lo Que Dicen los DJs</p>
 	<!-- /wp:paragraph -->
 
-	<!-- wp:heading {"textAlign":"center","level":2,"textColor":"contrast","fontSize":"xx-large"} -->
-	<h2 class="wp-block-heading has-text-align-center has-contrast-color has-text-color has-xx-large-font-size">Miles de DJs ya confían en NCH</h2>
+	<!-- wp:heading {"textAlign":"center","level":2,"textColor":"contrast","fontSize":"xx-large","className":"nch-testimonials__heading"} -->
+	<h2 class="wp-block-heading has-text-align-center has-contrast-color has-text-color has-xx-large-font-size nch-testimonials__heading">Miles de DJs ya confían en NCH</h2>
 	<!-- /wp:heading -->
 
 	<!-- wp:columns {"align":"wide"} -->
