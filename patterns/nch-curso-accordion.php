@@ -3,7 +3,7 @@
  * Title: NCH Curso — Acordeón con Vídeo
  * Slug: nch-theme/curso-accordion
  * Categories: nch
- * Description: Acordeón de lecciones con vídeo incrustado. No puedes abrir la siguiente lección hasta terminar el vídeo anterior.
+ * Description: Acordeón nativo de WordPress con vídeos de YouTube. Cada lección se desbloquea al terminar el vídeo anterior.
  * Keywords: curso, acordeon, video, leccion, tutorial, escuela, nch
  * Viewport Width: 1280
  */
@@ -23,64 +23,61 @@
 	<p class="has-secondary-color has-text-color has-small-font-size">Completa el vídeo de cada lección para desbloquear la siguiente.</p>
 	<!-- /wp:paragraph -->
 
-	<!-- wp:html -->
-	<div class="nch-accordion" data-course-id="<?php echo esc_attr( get_the_ID() ); ?>">
+	<!-- wp:group {"className":"nch-lessons","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group nch-lessons">
 
-		<!-- LECCIÓN 1 -->
-		<div class="nch-accordion__item" data-index="0">
-			<button class="nch-accordion__header" type="button">
-				<span class="nch-accordion__icon"></span>
-				<span class="nch-accordion__number">01</span>
-				<span class="nch-accordion__title">Lección 1: Introducción al curso</span>
-				<span class="nch-accordion__chevron"></span>
-			</button>
-			<div class="nch-accordion__body">
-				<div class="nch-accordion__body-inner">
-					<div class="nch-video-wrapper">
-						<iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI?enablejsapi=1&rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-					</div>
-					<p class="nch-accordion__hint">▶ Termina el vídeo para desbloquear la siguiente lección</p>
-				</div>
-			</div>
-		</div>
+		<!-- Lección 1 — abierta por defecto -->
+		<!-- wp:details {"showContent":true,"className":"nch-lesson"} -->
+		<details class="wp-block-details nch-lesson" open>
+			<summary>01 — Lección 1: Introducción al curso</summary>
 
-		<!-- LECCIÓN 2 -->
-		<div class="nch-accordion__item nch-accordion__item--locked" data-index="1">
-			<button class="nch-accordion__header" type="button">
-				<span class="nch-accordion__icon">🔒</span>
-				<span class="nch-accordion__number">02</span>
-				<span class="nch-accordion__title">Lección 2: Fundamentos de producción</span>
-				<span class="nch-accordion__chevron"></span>
-			</button>
-			<div class="nch-accordion__body">
-				<div class="nch-accordion__body-inner">
-					<div class="nch-video-wrapper">
-						<iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI?enablejsapi=1&rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-					</div>
-					<p class="nch-accordion__hint">▶ Termina el vídeo para desbloquear la siguiente lección</p>
-				</div>
-			</div>
-		</div>
+			<!-- wp:embed {"url":"https://www.youtube.com/watch?v=VIDEO_ID_AQUI","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+			<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+			https://www.youtube.com/watch?v=VIDEO_ID_AQUI
+			</div></figure>
+			<!-- /wp:embed -->
 
-		<!-- LECCIÓN 3 -->
-		<div class="nch-accordion__item nch-accordion__item--locked" data-index="2">
-			<button class="nch-accordion__header" type="button">
-				<span class="nch-accordion__icon">🔒</span>
-				<span class="nch-accordion__number">03</span>
-				<span class="nch-accordion__title">Lección 3: Mezcla y exportación</span>
-				<span class="nch-accordion__chevron"></span>
-			</button>
-			<div class="nch-accordion__body">
-				<div class="nch-accordion__body-inner">
-					<div class="nch-video-wrapper">
-						<iframe src="https://www.youtube.com/embed/VIDEO_ID_AQUI?enablejsapi=1&rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-					</div>
-				</div>
-			</div>
-		</div>
+			<!-- wp:paragraph {"textColor":"secondary","fontSize":"small","className":"nch-lesson__hint"} -->
+			<p class="has-secondary-color has-text-color has-small-font-size nch-lesson__hint">▶ Termina el vídeo para desbloquear la siguiente lección</p>
+			<!-- /wp:paragraph -->
+
+		</details>
+		<!-- /wp:details -->
+
+		<!-- Lección 2 — bloqueada -->
+		<!-- wp:details {"showContent":false,"className":"nch-lesson nch-lesson--locked"} -->
+		<details class="wp-block-details nch-lesson nch-lesson--locked">
+			<summary>02 — Lección 2: Fundamentos de producción</summary>
+
+			<!-- wp:embed {"url":"https://www.youtube.com/watch?v=VIDEO_ID_AQUI","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+			<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+			https://www.youtube.com/watch?v=VIDEO_ID_AQUI
+			</div></figure>
+			<!-- /wp:embed -->
+
+			<!-- wp:paragraph {"textColor":"secondary","fontSize":"small","className":"nch-lesson__hint"} -->
+			<p class="has-secondary-color has-text-color has-small-font-size nch-lesson__hint">▶ Termina el vídeo para desbloquear la siguiente lección</p>
+			<!-- /wp:paragraph -->
+
+		</details>
+		<!-- /wp:details -->
+
+		<!-- Lección 3 — bloqueada -->
+		<!-- wp:details {"showContent":false,"className":"nch-lesson nch-lesson--locked"} -->
+		<details class="wp-block-details nch-lesson nch-lesson--locked">
+			<summary>03 — Lección 3: Mezcla y exportación</summary>
+
+			<!-- wp:embed {"url":"https://www.youtube.com/watch?v=VIDEO_ID_AQUI","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+			<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+			https://www.youtube.com/watch?v=VIDEO_ID_AQUI
+			</div></figure>
+			<!-- /wp:embed -->
+
+		</details>
+		<!-- /wp:details -->
 
 	</div>
-	<!-- /wp:html -->
+	<!-- /wp:group -->
 
 </div>
 <!-- /wp:group -->

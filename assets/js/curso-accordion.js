@@ -1,121 +1,115 @@
 (function () {
 	'use strict';
 
-	var accordion = document.querySelector('.nch-accordion');
-	if (!accordion) return;
+	var lessons    = Array.from(document.querySelectorAll('.nch-lesson'));
+	if (!lessons.length) return;
 
-	var courseId   = accordion.dataset.courseId || 'default';
+	var container  = lessons[0].closest('[data-course-id]') || document.querySelector('.nch-lessons');
+	var courseId   = container ? (container.dataset.courseId || window.location.pathname) : window.location.pathname;
 	var storageKey = 'nch_progress_' + courseId;
-	var items      = Array.from(accordion.querySelectorAll('.nch-accordion__item'));
 	var progress   = JSON.parse(localStorage.getItem(storageKey) || '{}');
-	var ytPlayers  = {};
 
-	/* ── Helpers ───────────────────────────────────── */
+	/* ── Helpers ─────────────────────────────────── */
 
-	function isUnlocked(index) {
-		return index === 0 || progress[String(index - 1)] === true;
-	}
+	function isDone(index)     { return progress[String(index)] === true; }
+	function isUnlocked(index) { return index === 0 || isDone(index - 1); }
 
 	function markDone(index) {
 		progress[String(index)] = true;
 		localStorage.setItem(storageKey, JSON.stringify(progress));
 		render();
-		var next = items[index + 1];
-		if (next) openItem(next);
+		var next = lessons[index + 1];
+		if (next) openLesson(next);
 	}
 
-	function openItem(item) {
-		items.forEach(function (i) {
-			i.classList.remove('nch-accordion__item--open');
-		});
-		item.classList.add('nch-accordion__item--open');
-		updateChevrons();
+	function openLesson(details) {
+		details.setAttribute('open', '');
 	}
 
-	function updateChevrons() {
-		items.forEach(function (item) {
-			var chevron = item.querySelector('.nch-accordion__chevron');
-			if (!chevron) return;
-			chevron.classList.toggle('nch-accordion__chevron--open', item.classList.contains('nch-accordion__item--open'));
-		});
-	}
+	/* ── Render state ─────────────────────────────── */
 
 	function render() {
-		items.forEach(function (item, index) {
+		lessons.forEach(function (details, index) {
 			var unlocked = isUnlocked(index);
-			var done     = progress[String(index)] === true;
-			var icon     = item.querySelector('.nch-accordion__icon');
+			var done     = isDone(index);
+			var summary  = details.querySelector('summary');
+			var hint     = details.querySelector('.nch-lesson__hint');
 
-			item.classList.toggle('nch-accordion__item--locked', !unlocked);
-			item.classList.toggle('nch-accordion__item--done', done);
+			details.classList.toggle('nch-lesson--locked', !unlocked);
+			details.classList.toggle('nch-lesson--done', done);
 
-			if (icon) {
-				if (done)          icon.textContent = '✓';
-				else if (!unlocked) icon.textContent = '🔒';
-				else               icon.textContent = '';
+			if (summary) {
+				var icon = summary.querySelector('.nch-lesson__icon');
+				if (!icon) {
+					icon = document.createElement('span');
+					icon.className = 'nch-lesson__icon';
+					summary.insertBefore(icon, summary.firstChild);
+				}
+				icon.textContent = done ? '✓' : (!unlocked ? '🔒' : '');
 			}
 
-			var hint = item.querySelector('.nch-accordion__hint');
-			if (hint) {
-				hint.style.display = done ? 'none' : '';
-			}
+			if (hint) hint.style.display = done ? 'none' : '';
 		});
 	}
 
-	/* ── Click handlers ────────────────────────────── */
+	/* ── Bloquear click en lecciones cerradas ─────── */
 
-	items.forEach(function (item) {
-		var header = item.querySelector('.nch-accordion__header');
-		if (!header) return;
-		header.addEventListener('click', function () {
-			if (item.classList.contains('nch-accordion__item--locked')) return;
-			if (!item.classList.contains('nch-accordion__item--open')) {
-				openItem(item);
+	lessons.forEach(function (details) {
+		var summary = details.querySelector('summary');
+		if (!summary) return;
+		summary.addEventListener('click', function (e) {
+			if (details.classList.contains('nch-lesson--locked')) {
+				e.preventDefault();
 			}
 		});
 	});
 
-	/* ── HTML5 video ───────────────────────────────── */
+	/* ── Añadir enablejsapi=1 a iframes de YouTube ── */
 
-	items.forEach(function (item, index) {
-		var video = item.querySelector('video');
-		if (!video) return;
-		video.addEventListener('ended', function () {
-			markDone(index);
-		});
-	});
+	function patchYouTubeIframe(iframe) {
+		var src = iframe.src || '';
+		if (!src.includes('enablejsapi')) {
+			iframe.src = src + (src.includes('?') ? '&' : '?') + 'enablejsapi=1';
+		}
+	}
 
-	/* ── YouTube Iframe API ────────────────────────── */
+	/* ── YouTube Iframe API ───────────────────────── */
 
-	function initYouTubePlayer(iframe, index) {
-		ytPlayers[index] = new YT.Player(iframe, {
-			events: {
-				onStateChange: function (event) {
-					if (event.data === YT.PlayerState.ENDED) {
-						markDone(index);
+	function initYouTube() {
+		lessons.forEach(function (details, index) {
+			var iframe = details.querySelector('iframe[src*="youtube"]');
+			if (!iframe) return;
+			patchYouTubeIframe(iframe);
+			new YT.Player(iframe, {
+				events: {
+					onStateChange: function (e) {
+						if (e.data === YT.PlayerState.ENDED) markDone(index);
 					}
 				}
-			}
+			});
 		});
 	}
 
-	window.onYouTubeIframeAPIReady = function () {
-		items.forEach(function (item, index) {
-			var iframe = item.querySelector('iframe[src*="youtube.com"]');
-			if (iframe) initYouTubePlayer(iframe, index);
-		});
-	};
+	window.onYouTubeIframeAPIReady = initYouTube;
 
-	if (accordion.querySelector('iframe[src*="youtube.com"]')) {
-		var tag  = document.createElement('script');
-		tag.src  = 'https://www.youtube.com/iframe_api';
+	if (document.querySelector('.nch-lesson iframe[src*="youtube"]') ||
+		document.querySelector('.nch-lesson .wp-block-embed-youtube')) {
+		var tag   = document.createElement('script');
+		tag.src   = 'https://www.youtube.com/iframe_api';
 		var first = document.getElementsByTagName('script')[0];
 		first.parentNode.insertBefore(tag, first);
 	}
 
-	/* ── Init ──────────────────────────────────────── */
+	/* ── HTML5 video fallback ─────────────────────── */
+
+	lessons.forEach(function (details, index) {
+		var video = details.querySelector('video');
+		if (!video) return;
+		video.addEventListener('ended', function () { markDone(index); });
+	});
+
+	/* ── Init ─────────────────────────────────────── */
 
 	render();
-	if (items[0]) openItem(items[0]);
 
 })();
