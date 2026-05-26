@@ -22,8 +22,8 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:group {"className":"nch-lessons","layout":{"type":"constrained"}} -->
-<div class="wp-block-group nch-lessons"><!-- wp:details {"showContent":true,"className":"nch-lesson"} -->
-<details class="wp-block-details nch-lesson" open><summary>01 — Lección 1: Introducción al curso</summary><!-- wp:embed {"url":"https://www.youtube.com/watch?v=VIDEO_ID_AQUI","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
+<div class="wp-block-group nch-lessons"><!-- wp:details {"showContent":true,"className":"nch-lesson nch-lesson--locked"} -->
+<details class="wp-block-details nch-lesson nch-lesson--locked" open><summary>01 — Lección 1: Introducción al curso</summary><!-- wp:embed {"url":"https://www.youtube.com/watch?v=VIDEO_ID_AQUI","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
 <figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
 https://www.youtube.com/watch?v=VIDEO_ID_AQUI
 </div></figure>

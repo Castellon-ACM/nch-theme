@@ -32,52 +32,67 @@ add_action( 'init', function () {
 } );
 
 /**
- * Gating de lecciones con PMPro.
+ * Gating de lecciones con PMS.
  *
- * Los details con clase nch-lesson--locked requieren membresía activa.
- * Sin membresía se reemplaza el contenido por un CTA de suscripción.
- * Con membresía activa se elimina --locked y la lección se abre normalmente.
+ * Sin suscripción "Cursos" activa:
+ *  - Todas las lecciones aparecen bloqueadas (solo el título, sin contenido).
+ *  - El contenedor nch-lessons añade un CTA único al final.
+ * Con suscripción activa: todo se muestra normal y se elimina --locked.
  */
-add_filter( 'render_block', 'nch_gate_locked_lessons', 10, 2 );
-function nch_gate_locked_lessons( $block_content, $block ) {
-	if ( is_admin() ) {
-		return $block_content;
-	}
+function nch_cursos_has_access(): bool {
+	static $result = null;
+	if ( $result !== null ) return $result;
 
-	if ( 'core/details' !== $block['blockName'] ) {
-		return $block_content;
-	}
-
-	$classes = $block['attrs']['className'] ?? '';
-	if ( ! str_contains( $classes, 'nch-lesson--locked' ) ) {
-		return $block_content;
-	}
-
-	$plan     = function_exists( 'pms_get_subscription_plans' )
+	$plan = function_exists( 'pms_get_subscription_plans' )
 		? current( array_filter( pms_get_subscription_plans(), fn( $p ) => $p->name === 'Cursos' ) )
 		: false;
-	$has_access = $plan && function_exists( 'pms_is_member' ) && pms_is_member( get_current_user_id(), $plan->id );
 
-	if ( $has_access ) {
-		return str_replace( 'nch-lesson--locked', '', $block_content );
+	$result = $plan && function_exists( 'pms_is_member' ) && pms_is_member( get_current_user_id(), $plan->id );
+	return $result;
+}
+
+add_filter( 'render_block', 'nch_gate_lessons_block', 10, 2 );
+function nch_gate_lessons_block( $block_content, $block ) {
+	if ( is_admin() ) return $block_content;
+
+	// Bloquea cada lección individual — todas, no solo las marcadas --locked
+	if ( 'core/details' === $block['blockName'] ) {
+		$classes = $block['attrs']['className'] ?? '';
+		if ( ! str_contains( $classes, 'nch-lesson' ) ) return $block_content;
+
+		if ( nch_cursos_has_access() ) {
+			return str_replace( 'nch-lesson--locked', '', $block_content );
+		}
+
+		preg_match( '/<summary>(.*?)<\/summary>/s', $block_content, $m );
+		$summary = $m[0] ?? '<summary>Lección</summary>';
+		return '<details class="wp-block-details nch-lesson nch-lesson--locked">' . $summary . '</details>';
 	}
 
-	$checkout_url = function_exists( 'pmpro_url' )
-		? pmpro_url( 'checkout', '?level=1' )
-		: home_url( '/suscripcion/' );
+	// Añade CTA único al contenedor de lecciones
+	if ( 'core/group' === $block['blockName'] ) {
+		$classes = $block['attrs']['className'] ?? '';
+		if ( ! str_contains( $classes, 'nch-lessons' ) ) return $block_content;
+		if ( nch_cursos_has_access() ) return $block_content;
 
-	preg_match( '/<summary>(.*?)<\/summary>/s', $block_content, $matches );
-	$summary = isset( $matches[0] ) ? $matches[0] : '<summary>Lección bloqueada</summary>';
+		$pms_settings  = get_option( 'pms_general_settings', [] );
+		$register_id   = $pms_settings['register_page'] ?? 0;
+		$checkout_url  = $register_id ? get_permalink( $register_id ) : home_url( '/login/' );
 
-	return sprintf(
-		'<details class="wp-block-details nch-lesson nch-lesson--locked">
-			%s
-			<div class="nch-lesson__cta">
-				<p class="nch-lesson__cta-text">Activa tu suscripción para desbloquear esta lección.</p>
-				<a href="%s" class="nch-lesson__cta-btn">Suscribirme ahora</a>
-			</div>
-		</details>',
-		$summary,
-		esc_url( $checkout_url )
-	);
+		$cta = sprintf(
+			'<div class="nch-lessons__cta">
+				<p class="nch-lessons__cta-text">Podrás acceder a esta funcionalidad suscribiéndote a los cursos de NCH.</p>
+				<a href="%s" class="nch-lessons__cta-btn">Suscribirme a los Cursos</a>
+			</div>',
+			esc_url( $checkout_url )
+		);
+
+		$pos = strrpos( $block_content, '</div>' );
+		if ( $pos !== false ) {
+			$block_content = substr_replace( $block_content, $cta, $pos, 0 );
+		}
+		return $block_content;
+	}
+
+	return $block_content;
 }

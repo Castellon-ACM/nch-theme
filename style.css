@@ -436,36 +436,36 @@ body {
 	height: 100%;
 }
 
-/* CTA suscripción — lección bloqueada sin acceso PMPro */
-.nch-lesson__cta {
-	padding: 1.5rem;
+/* CTA suscripción — sin acceso a cursos */
+.nch-lessons__cta {
+	padding: 2rem 1.5rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 1rem;
 	text-align: center;
-	background: var(--wp--preset--color--base-2);
+	border-top: 1px solid var(--wp--preset--color--base-3);
 }
 
-.nch-lesson__cta-text {
+.nch-lessons__cta-text {
 	margin: 0;
 	color: var(--wp--preset--color--secondary);
-	font-size: 0.9rem;
+	font-size: 0.95rem;
 }
 
-.nch-lesson__cta-btn {
+.nch-lessons__cta-btn {
 	display: inline-block;
-	padding: 0.65rem 1.5rem;
+	padding: 0.75rem 2rem;
 	background: var(--wp--preset--color--primary);
 	color: #fff;
 	border-radius: 4px;
 	font-weight: 600;
-	font-size: 0.9rem;
+	font-size: 0.95rem;
 	text-decoration: none;
 	transition: opacity 0.2s ease;
 }
 
-.nch-lesson__cta-btn:hover {
+.nch-lessons__cta-btn:hover {
 	opacity: 0.85;
 	color: #fff;
 }
