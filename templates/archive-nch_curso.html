@@ -1,15 +1,20 @@
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
-<!-- wp:group {"align":"full","backgroundColor":"base","className":"nch-section","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull has-base-background-color has-background nch-section">
+<!-- Hero -->
+<!-- wp:group {"align":"full","backgroundColor":"base","className":"nch-section--hero","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull has-base-background-color has-background nch-section--hero">
 
-	<!-- wp:paragraph {"textColor":"primary","className":"nch-label"} -->
-	<p class="has-primary-color has-text-color nch-label">Escuela de Música</p>
+	<!-- wp:paragraph {"align":"center","textColor":"primary","className":"nch-label"} -->
+	<p class="has-text-align-center has-primary-color has-text-color nch-label">Escuela de Música</p>
 	<!-- /wp:paragraph -->
 
-	<!-- wp:heading {"level":1,"textColor":"contrast","fontSize":"xx-large"} -->
-	<h1 class="wp-block-heading has-contrast-color has-text-color has-xx-large-font-size">Todos los Cursos</h1>
+	<!-- wp:heading {"textAlign":"center","level":1,"textColor":"contrast","fontSize":"huge","className":"nch-hero__title"} -->
+	<h1 class="wp-block-heading has-text-align-center has-contrast-color has-text-color has-huge-font-size nch-hero__title">Cursos</h1>
 	<!-- /wp:heading -->
+
+	<!-- wp:paragraph {"align":"center","textColor":"secondary","fontSize":"large","className":"nch-hero__subtitle"} -->
+	<p class="has-text-align-center has-secondary-color has-text-color has-large-font-size nch-hero__subtitle">Aprende producción, mezcla, mastering y DJ con instructores profesionales.</p>
+	<!-- /wp:paragraph -->
 
 	<!-- wp:html -->
 	<div class="nch-courses-search-wrapper">
@@ -37,6 +42,13 @@
 	</script>
 	<!-- /wp:html -->
 
+</div>
+<!-- /wp:group -->
+
+<!-- Grid de cursos -->
+<!-- wp:group {"align":"full","backgroundColor":"base","className":"nch-section","layout":{"type":"constrained"}} -->
+<div class="wp-block-group alignfull has-base-background-color has-background nch-section">
+
 	<!-- wp:query {"query":{"inherit":true},"layout":{"type":"constrained"}} -->
 	<div class="wp-block-query">
 
@@ -49,9 +61,7 @@
 
 				<!-- wp:group {"className":"nch-course-card__body","layout":{"type":"constrained"}} -->
 				<div class="wp-block-group nch-course-card__body">
-
 					<!-- wp:post-title {"isLink":true,"textColor":"contrast","fontSize":"medium","level":3} /-->
-
 				</div>
 				<!-- /wp:group -->
 
