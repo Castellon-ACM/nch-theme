@@ -53,7 +53,10 @@ function nch_gate_locked_lessons( $block_content, $block ) {
 		return $block_content;
 	}
 
-	$has_access = function_exists( 'pmpro_hasMembershipLevel' ) && pmpro_hasMembershipLevel();
+	$plan     = function_exists( 'pms_get_subscription_plans' )
+		? current( array_filter( pms_get_subscription_plans(), fn( $p ) => $p->name === 'Cursos' ) )
+		: false;
+	$has_access = $plan && function_exists( 'pms_is_member' ) && pms_is_member( get_current_user_id(), $plan->id );
 
 	if ( $has_access ) {
 		return str_replace( 'nch-lesson--locked', '', $block_content );
