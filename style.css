@@ -389,6 +389,12 @@ body {
 	margin-bottom: 1.5rem;
 }
 
+.nch-service-card__icon img.emoji,
+.nch-feature__icon img.emoji,
+.nch-genre-card__emoji img.emoji {
+	filter: grayscale(1) brightness(0.5);
+}
+
 .nch-service-card__features.wp-block-list {
 	list-style: none;
 	padding: 0;
@@ -430,7 +436,7 @@ body {
 
 .nch-auth-card {
 	width: 100%;
-	max-width: 480px;
+	max-width: 680px;
 	border: 1px solid var(--wp--preset--color--base-3);
 	border-radius: 12px;
 	padding: 2.5rem;
