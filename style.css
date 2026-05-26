@@ -436,6 +436,40 @@ body {
 	height: 100%;
 }
 
+/* CTA suscripción — lección bloqueada sin acceso PMPro */
+.nch-lesson__cta {
+	padding: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	text-align: center;
+	background: var(--wp--preset--color--base-2);
+}
+
+.nch-lesson__cta-text {
+	margin: 0;
+	color: var(--wp--preset--color--secondary);
+	font-size: 0.9rem;
+}
+
+.nch-lesson__cta-btn {
+	display: inline-block;
+	padding: 0.65rem 1.5rem;
+	background: var(--wp--preset--color--primary);
+	color: #fff;
+	border-radius: 4px;
+	font-weight: 600;
+	font-size: 0.9rem;
+	text-decoration: none;
+	transition: opacity 0.2s ease;
+}
+
+.nch-lesson__cta-btn:hover {
+	opacity: 0.85;
+	color: #fff;
+}
+
 /* === Cursos Archive === */
 
 .nch-courses-search-wrapper {
