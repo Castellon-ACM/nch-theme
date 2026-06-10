@@ -1142,3 +1142,232 @@ body {
 .nch-account-dropdown a:last-child {
 	color: var(--wp--preset--color--secondary);
 }
+
+/* === Account Page === */
+
+.nch-account-page {
+	min-height: calc(100vh - 64px);
+	padding-top: 3rem;
+	padding-bottom: 4rem;
+}
+
+.nch-account-wrap {
+	max-width: 860px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+/* Hero */
+.nch-account-hero {
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+	margin-bottom: 2.5rem;
+}
+
+.nch-account-avatar {
+	width: 72px;
+	height: 72px;
+	border-radius: 50%;
+	background: var(--wp--preset--color--primary);
+	color: #fff;
+	font-size: 1.8rem;
+	font-weight: 900;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	letter-spacing: -0.02em;
+}
+
+.nch-account-name {
+	font-size: clamp(1.4rem, 3vw, 1.9rem);
+	font-weight: 900;
+	letter-spacing: -0.02em;
+	margin: 0 0 0.25rem;
+}
+
+.nch-account-email {
+	font-size: 0.9rem;
+	color: var(--wp--preset--color--secondary);
+	margin: 0;
+}
+
+/* Grid */
+.nch-account-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.5rem;
+}
+
+@media (max-width: 680px) {
+	.nch-account-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Card */
+.nch-account-card {
+	background: var(--wp--preset--color--base-2);
+	border: 1px solid var(--wp--preset--color--base-3);
+	border-radius: 12px;
+	padding: 1.75rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.nch-account-card__title {
+	font-size: 0.72rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+	color: var(--wp--preset--color--secondary);
+	margin: 0;
+}
+
+/* Info list */
+.nch-account-info-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+.nch-account-info-list li {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 1rem;
+	padding: 0.65rem 0;
+	border-bottom: 1px solid var(--wp--preset--color--base-3);
+	font-size: 0.88rem;
+}
+
+.nch-account-info-list li:last-child {
+	border-bottom: none;
+}
+
+.nch-account-info-list__key {
+	color: var(--wp--preset--color--secondary);
+	flex-shrink: 0;
+}
+
+.nch-account-info-list__val {
+	color: var(--wp--preset--color--contrast);
+	text-align: right;
+	word-break: break-all;
+}
+
+/* Actions */
+.nch-account-card__actions {
+	display: flex;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+	margin-top: auto;
+}
+
+.nch-account-action-btn {
+	display: inline-block;
+	padding: 0.6rem 1.1rem;
+	background: var(--wp--preset--color--primary);
+	color: #fff;
+	border-radius: 5px;
+	font-size: 0.8rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	text-decoration: none;
+	transition: opacity 0.2s ease;
+}
+
+.nch-account-action-btn:hover {
+	opacity: 0.82;
+	color: #fff;
+}
+
+.nch-account-action-btn--ghost {
+	background: transparent;
+	border: 1px solid var(--wp--preset--color--base-3);
+	color: var(--wp--preset--color--secondary);
+}
+
+.nch-account-action-btn--ghost:hover {
+	border-color: var(--wp--preset--color--contrast);
+	color: var(--wp--preset--color--contrast);
+	opacity: 1;
+}
+
+/* Subscriptions */
+.nch-sub-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+.nch-sub-item {
+	padding: 0.85rem 0;
+	border-bottom: 1px solid var(--wp--preset--color--base-3);
+}
+
+.nch-sub-item:last-child {
+	border-bottom: none;
+}
+
+.nch-sub-item__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+}
+
+.nch-sub-item__name {
+	font-size: 0.95rem;
+	font-weight: 700;
+	color: var(--wp--preset--color--contrast);
+}
+
+.nch-sub-item__meta {
+	font-size: 0.78rem;
+	color: var(--wp--preset--color--secondary);
+	margin: 0.3rem 0 0;
+}
+
+.nch-sub-status {
+	font-size: 0.68rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	padding: 0.2rem 0.55rem;
+	border-radius: 50px;
+	flex-shrink: 0;
+}
+
+.nch-sub-status--active {
+	background: rgba(34, 197, 94, 0.12);
+	color: #22c55e;
+	border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.nch-sub-status--expired {
+	background: rgba(255, 45, 45, 0.1);
+	color: var(--wp--preset--color--primary);
+	border: 1px solid rgba(255, 45, 45, 0.25);
+}
+
+.nch-sub-status--pending {
+	background: rgba(234, 179, 8, 0.1);
+	color: #eab308;
+	border: 1px solid rgba(234, 179, 8, 0.25);
+}
+
+.nch-account-empty {
+	font-size: 0.88rem;
+	color: var(--wp--preset--color--secondary);
+	margin: 0;
+}

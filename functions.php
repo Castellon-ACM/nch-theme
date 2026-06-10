@@ -34,9 +34,11 @@ add_action( 'init', function () {
 add_filter( 'template_include', function ( $template ) {
 	if ( is_page( 'login' ) ) {
 		$custom = get_template_directory() . '/templates/page-login.php';
-		if ( file_exists( $custom ) ) {
-			return $custom;
-		}
+		if ( file_exists( $custom ) ) return $custom;
+	}
+	if ( is_page( 'mi-cuenta' ) ) {
+		$custom = get_template_directory() . '/templates/page-account.php';
+		if ( file_exists( $custom ) ) return $custom;
 	}
 	return $template;
 } );
