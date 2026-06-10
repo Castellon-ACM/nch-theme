@@ -249,22 +249,19 @@ function nch_account_btn_script(): void {
  * Con suscripción activa: todo se muestra normal y se elimina --locked.
  */
 function nch_cursos_has_access(): bool {
-	static $result = null;
-	if ( $result !== null ) return $result;
+	static $cache = [];
+	$user_id = get_current_user_id();
 
-	if ( ! is_user_logged_in() ) {
-		$result = false;
-		return $result;
-	}
+	if ( isset( $cache[ $user_id ] ) ) return $cache[ $user_id ];
 
-	$result = nch_user_has_active_subscription( get_current_user_id() );
-	return $result;
+	$cache[ $user_id ] = $user_id > 0 && nch_user_has_active_subscription( $user_id );
+	return $cache[ $user_id ];
 }
 
 function nch_user_has_active_subscription( int $user_id ): bool {
 	$subs = nch_get_pms_subscriptions( $user_id );
 	foreach ( $subs as $s ) {
-		$status = is_object( $s ) ? ( $s->status ?? '' ) : ( $s['status'] ?? '' );
+		$status = strtolower( trim( is_object( $s ) ? ( $s->status ?? '' ) : ( $s['status'] ?? '' ) ) );
 		if ( $status === 'active' ) return true;
 	}
 	return false;
