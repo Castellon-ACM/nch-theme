@@ -1063,3 +1063,82 @@ body {
 		position: static;
 	}
 }
+
+/* === Account Button (header) === */
+
+.nch-account-btn {
+	position: relative;
+	flex-shrink: 0;
+}
+
+.nch-account-circle {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: var(--wp--preset--color--primary);
+	color: #fff;
+	border: none;
+	cursor: pointer;
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+	flex-shrink: 0;
+	line-height: 1;
+}
+
+.nch-account-circle--guest {
+	background: var(--wp--preset--color--base-3);
+	color: var(--wp--preset--color--secondary);
+}
+
+.nch-account-circle:hover,
+.nch-account-circle:focus-visible {
+	opacity: 0.8;
+	outline: 2px solid var(--wp--preset--color--primary);
+	outline-offset: 2px;
+}
+
+.nch-account-dropdown {
+	position: absolute;
+	top: calc(100% + 10px);
+	right: 0;
+	background: var(--wp--preset--color--base-2);
+	border: 1px solid var(--wp--preset--color--base-3);
+	border-radius: 8px;
+	padding: 0.4rem;
+	min-width: 160px;
+	z-index: 200;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.nch-account-dropdown[hidden] {
+	display: none;
+}
+
+.nch-account-dropdown a {
+	display: block;
+	padding: 0.6rem 0.9rem;
+	border-radius: 5px;
+	font-size: 0.85rem;
+	font-weight: 500;
+	color: var(--wp--preset--color--contrast);
+	text-decoration: none;
+	transition: background 0.15s ease;
+	white-space: nowrap;
+}
+
+.nch-account-dropdown a:hover {
+	background: var(--wp--preset--color--base-3);
+}
+
+.nch-account-dropdown a:last-child {
+	color: var(--wp--preset--color--secondary);
+}

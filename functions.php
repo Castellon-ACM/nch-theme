@@ -101,6 +101,61 @@ function nch_handle_register() {
 }
 
 /**
+ * Botón de cuenta en el header.
+ */
+add_shortcode( 'nch_account_btn', 'nch_render_account_btn' );
+function nch_render_account_btn(): string {
+	if ( is_user_logged_in() ) {
+		$user        = wp_get_current_user();
+		$initial     = strtoupper( mb_substr( $user->display_name, 0, 1 ) );
+		$account_url = home_url( '/mi-cuenta/' );
+		$logout_url  = wp_logout_url( home_url( '/' ) );
+		return sprintf(
+			'<div class="nch-account-btn">
+				<button class="nch-account-circle" aria-label="Mi cuenta" aria-expanded="false" aria-controls="nch-account-dropdown">%s</button>
+				<div class="nch-account-dropdown" id="nch-account-dropdown" hidden>
+					<a href="%s">Mi cuenta</a>
+					<a href="%s">Cerrar sesión</a>
+				</div>
+			</div>',
+			esc_html( $initial ),
+			esc_url( $account_url ),
+			esc_url( $logout_url )
+		);
+	}
+	return sprintf(
+		'<a href="%s" class="nch-account-circle nch-account-circle--guest" aria-label="Iniciar sesión">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+		</a>',
+		esc_url( home_url( '/login/' ) )
+	);
+}
+
+add_action( 'wp_footer', 'nch_account_btn_script' );
+function nch_account_btn_script(): void {
+	?>
+	<script>
+	(function(){
+		const btn = document.querySelector('.nch-account-circle[aria-controls]');
+		const drop = document.getElementById('nch-account-dropdown');
+		if(!btn||!drop) return;
+		btn.addEventListener('click',function(e){
+			e.stopPropagation();
+			const open = !drop.hidden;
+			drop.hidden = open;
+			btn.setAttribute('aria-expanded', String(!open));
+		});
+		document.addEventListener('click',function(){
+			drop.hidden=true;
+			btn.setAttribute('aria-expanded','false');
+		});
+		drop.addEventListener('click',function(e){e.stopPropagation();});
+	})();
+	</script>
+	<?php
+}
+
+/**
  * Gating de lecciones con PMS.
  *
  * Sin suscripción "Cursos" activa:
