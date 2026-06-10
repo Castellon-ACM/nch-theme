@@ -252,14 +252,43 @@ function nch_cursos_has_access(): bool {
 	static $result = null;
 	if ( $result !== null ) return $result;
 
-	if ( ! is_user_logged_in() || ! function_exists( 'pms_get_member_subscriptions' ) ) {
+	if ( ! is_user_logged_in() ) {
 		$result = false;
 		return $result;
 	}
 
-	$subs   = pms_get_member_subscriptions( get_current_user_id() );
-	$result = ! empty( array_filter( $subs, fn( $s ) => $s->status === 'active' ) );
+	$result = nch_user_has_active_subscription( get_current_user_id() );
 	return $result;
+}
+
+function nch_user_has_active_subscription( int $user_id ): bool {
+	$subs = nch_get_pms_subscriptions( $user_id );
+	foreach ( $subs as $s ) {
+		$status = is_object( $s ) ? ( $s->status ?? '' ) : ( $s['status'] ?? '' );
+		if ( $status === 'active' ) return true;
+	}
+	return false;
+}
+
+function nch_get_pms_subscriptions( int $user_id ): array {
+	// PMS 3.x — acepta array de args
+	if ( function_exists( 'pms_get_member_subscriptions' ) ) {
+		$subs = pms_get_member_subscriptions( [ 'user_id' => $user_id ] );
+		if ( is_array( $subs ) && ! empty( $subs ) ) return $subs;
+
+		// PMS 2.x — acepta user_id directo
+		$subs = pms_get_member_subscriptions( $user_id );
+		if ( is_array( $subs ) && ! empty( $subs ) ) return $subs;
+	}
+
+	// Fallback: consulta directa a la tabla de PMS
+	global $wpdb;
+	$table = $wpdb->prefix . 'pms_member_subscriptions';
+	if ( $wpdb->get_var( "SHOW TABLES LIKE '{$table}'" ) !== $table ) return [];
+
+	return $wpdb->get_results(
+		$wpdb->prepare( "SELECT * FROM `{$table}` WHERE user_id = %d", $user_id )
+	) ?: [];
 }
 
 add_filter( 'render_block', 'nch_gate_lessons_block', 10, 2 );

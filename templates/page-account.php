@@ -17,10 +17,7 @@ $saved   = isset( $_GET['guardado'] );
 $error   = isset( $_GET['nch_error'] ) ? urldecode( sanitize_text_field( wp_unslash( $_GET['nch_error'] ) ) ) : '';
 
 // Suscripciones PMS
-$subscriptions = [];
-if ( function_exists( 'pms_get_member_subscriptions' ) ) {
-	$subscriptions = pms_get_member_subscriptions( $user->ID );
-}
+$subscriptions = nch_get_pms_subscriptions( $user->ID );
 
 $status_labels = [
 	'active'   => [ 'label' => 'Activa',    'class' => 'nch-sub-status--active' ],
@@ -165,12 +162,15 @@ $status_labels = [
 			<?php else : ?>
 			<ul class="nch-sub-list">
 				<?php foreach ( $subscriptions as $sub ) :
-					$plan = function_exists( 'pms_get_subscription_plan' ) ? pms_get_subscription_plan( $sub->subscription_plan_id ) : null;
-					$plan_name   = $plan ? $plan->name : 'Plan #' . $sub->subscription_plan_id;
-					$status      = $sub->status ?? 'unknown';
+					$plan_id   = is_object( $sub ) ? $sub->subscription_plan_id : $sub['subscription_plan_id'];
+					$plan      = function_exists( 'pms_get_subscription_plan' ) ? pms_get_subscription_plan( $plan_id ) : null;
+					$plan_name = $plan ? $plan->name : 'Plan #' . $plan_id;
+					$status      = ( is_object( $sub ) ? $sub->status : $sub['status'] ) ?? 'unknown';
+					$exp_raw     = is_object( $sub ) ? $sub->expiration_date : $sub['expiration_date'];
+					$next_raw    = is_object( $sub ) ? $sub->billing_next_payment : $sub['billing_next_payment'];
 					$status_info = $status_labels[ $status ] ?? [ 'label' => ucfirst( $status ), 'class' => '' ];
-					$exp_date    = ! empty( $sub->expiration_date ) && $sub->expiration_date !== '0000-00-00' ? date_i18n( 'j \d\e F, Y', strtotime( $sub->expiration_date ) ) : null;
-					$next_pay    = ! empty( $sub->billing_next_payment ) && $sub->billing_next_payment !== '0000-00-00' ? date_i18n( 'j \d\e F, Y', strtotime( $sub->billing_next_payment ) ) : null;
+					$exp_date    = ! empty( $exp_raw ) && $exp_raw !== '0000-00-00' ? date_i18n( 'j \d\e F, Y', strtotime( $exp_raw ) ) : null;
+					$next_pay    = ! empty( $next_raw ) && $next_raw !== '0000-00-00' ? date_i18n( 'j \d\e F, Y', strtotime( $next_raw ) ) : null;
 				?>
 				<li class="nch-sub-item">
 					<div class="nch-sub-item__header">
