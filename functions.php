@@ -252,11 +252,13 @@ function nch_cursos_has_access(): bool {
 	static $result = null;
 	if ( $result !== null ) return $result;
 
-	$plan = function_exists( 'pms_get_subscription_plans' )
-		? current( array_filter( pms_get_subscription_plans(), fn( $p ) => $p->name === 'Cursos' ) )
-		: false;
+	if ( ! is_user_logged_in() || ! function_exists( 'pms_get_member_subscriptions' ) ) {
+		$result = false;
+		return $result;
+	}
 
-	$result = $plan && function_exists( 'pms_is_member' ) && pms_is_member( get_current_user_id(), $plan->id );
+	$subs   = pms_get_member_subscriptions( get_current_user_id() );
+	$result = ! empty( array_filter( $subs, fn( $s ) => $s->status === 'active' ) );
 	return $result;
 }
 
