@@ -31,6 +31,21 @@ add_action( 'init', function () {
 	register_block_pattern_category( 'nch', [ 'label' => __( 'NCH', 'nch-theme' ) ] );
 } );
 
+/**
+ * Excluir páginas con datos de usuario del caché (LiteSpeed + estándar).
+ */
+add_action( 'send_headers', function () {
+	if ( ! is_user_logged_in() ) return;
+
+	// LiteSpeed Cache — no cachear para usuarios logueados
+	do_action( 'litespeed_control_set_nocache', 'logged-in user' );
+	header( 'X-LiteSpeed-Cache-Control: no-cache, no-store' );
+
+	// Estándar
+	header( 'Cache-Control: no-store, no-cache, must-revalidate, max-age=0' );
+	header( 'Pragma: no-cache' );
+} );
+
 add_filter( 'template_include', function ( $template ) {
 	if ( is_page( 'login' ) ) {
 		$custom = get_template_directory() . '/templates/page-login.php';
