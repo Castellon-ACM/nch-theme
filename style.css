@@ -655,6 +655,100 @@ body {
 	border-color: var(--wp--preset--color--primary) !important;
 }
 
+/* === New pattern helpers === */
+
+.nch-split-hero__grid {
+	gap: clamp(1.5rem, 3vw, 2.5rem);
+	align-items: center;
+}
+
+.nch-split-hero__panel,
+.nch-spotlight__panel {
+	background: linear-gradient(135deg, rgba(255, 45, 45, 0.14), rgba(255, 60, 0, 0.05));
+	border: 1px solid var(--wp--preset--color--base-3);
+	border-radius: 16px;
+	padding: clamp(1.25rem, 2.4vw, 2rem);
+	height: 100%;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.nch-split-hero__list {
+	list-style: none;
+	padding: 0;
+	margin: 1.5rem 0 0;
+	display: grid;
+	gap: 0.75rem;
+}
+
+.nch-split-hero__list li {
+	padding: 0;
+	border: 0;
+	color: var(--wp--preset--color--secondary);
+}
+
+.nch-split-hero__list li::before {
+	content: '•';
+	color: var(--wp--preset--color--primary);
+	margin-right: 0.7rem;
+	font-weight: 700;
+}
+
+.nch-step-card {
+	background-color: var(--wp--preset--color--base-2);
+	border: 1px solid var(--wp--preset--color--base-3);
+	border-radius: 12px;
+	padding: clamp(1.25rem, 2.4vw, 1.75rem);
+	height: 100%;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.nch-step-card__icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.8rem;
+	height: 2.8rem;
+	border-radius: 999px;
+	background: rgba(255, 45, 45, 0.12);
+	font-size: 1.35rem;
+	line-height: 1;
+	margin-bottom: 1rem;
+}
+
+.nch-spotlight {
+	gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.nch-spotlight__stats {
+	display: grid;
+	gap: 0.8rem;
+	margin-top: 1.5rem;
+}
+
+.nch-spotlight__stats p {
+	margin: 0;
+	padding: 0.75rem 0;
+	border-bottom: 1px solid var(--wp--preset--color--base-3);
+}
+
+.nch-spotlight__stats p:last-child {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+@media (max-width: 782px) {
+	.nch-split-hero__grid,
+	.nch-spotlight {
+		gap: 1rem;
+	}
+
+	.nch-split-hero__panel,
+	.nch-spotlight__panel,
+	.nch-step-card {
+		padding: 1.25rem;
+	}
+}
+
 /* === Auth Page === */
 
 .nch-auth-page {
