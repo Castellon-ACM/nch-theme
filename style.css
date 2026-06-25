@@ -1320,8 +1320,13 @@ body {
 	margin: 0;
 }
 
-/* Info list */
-.nch-account-info-list {
+/* === PMS Register Form === */
+
+.pms-form {
+	width: 100%;
+}
+
+.pms-form-fields-wrapper {
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -1547,6 +1552,31 @@ body {
 	width: 100%;
 	background: var(--wp--preset--color--base-3);
 	border: 1px solid #2a2a2a;
+	gap: 1.1rem;
+}
+
+.pms-form .pms-field {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.pms-form label {
+	display: block;
+	font-size: 0.72rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	color: var(--wp--preset--color--secondary);
+	margin-bottom: 0.4rem;
+}
+
+.pms-form input[type="text"],
+.pms-form input[type="email"],
+.pms-form input[type="password"] {
+	width: 100%;
+	background: var(--wp--preset--color--base-3);
+	border: 1px solid transparent;
 	border-radius: 6px;
 	padding: 0.75rem 1rem;
 	color: var(--wp--preset--color--contrast);
@@ -1589,4 +1619,107 @@ body {
 	background: rgba(255, 45, 45, 0.1);
 	border: 1px solid rgba(255, 45, 45, 0.3);
 	color: var(--wp--preset--color--primary);
+}
+
+.pms-form input[type="text"]:focus,
+.pms-form input[type="email"]:focus,
+.pms-form input[type="password"]:focus {
+	outline: none;
+	border-color: var(--wp--preset--color--primary);
+}
+/* Plan info */
+.pms-subscription-plan {
+	background: var(--wp--preset--color--base-3);
+	border-radius: 6px;
+	padding: 0.85rem 1rem;
+	font-size: 0.9rem;
+	color: var(--wp--preset--color--contrast);
+}
+
+.pms-subscription-plan label {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.9rem;
+	text-transform: none;
+	letter-spacing: 0;
+	color: var(--wp--preset--color--contrast);
+	font-weight: 500;
+	cursor: default;
+}
+
+.pms-subscription-plan-name {
+	font-weight: 600;
+}
+
+.pms-subscription-plan-price {
+	color: var(--wp--preset--color--secondary);
+	font-size: 0.85rem;
+}
+
+.pms-subscription-plan-price-value {
+	color: var(--wp--preset--color--primary);
+	font-weight: 700;
+}
+
+/* Oculta campo de selección de plan si solo hay uno */
+.pms-subscription-plan input[type="radio"] {
+	display: none;
+}
+
+/* Submit */
+.pms-form-submit {
+	width: 100%;
+	margin-top: 1rem;
+	padding: 0.85rem;
+	background: var(--wp--preset--color--primary);
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	font-size: 1rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	cursor: pointer;
+	transition: opacity 0.2s ease;
+}
+
+.pms-form-submit:hover {
+	opacity: 0.85;
+}
+
+/* Mensajes de error y éxito */
+.pms-form .pms-errors,
+.pms_errors,
+ul.pms_errors {
+	list-style: none;
+	padding: 0.75rem 1rem;
+	margin: 0 0 1rem;
+	background: rgba(255, 45, 45, 0.1);
+	border: 1px solid var(--wp--preset--color--primary);
+	border-radius: 6px;
+	color: var(--wp--preset--color--primary);
+	font-size: 0.875rem;
+}
+
+.pms-form .pms-success,
+.pms_success {
+	padding: 0.75rem 1rem;
+	margin: 0 0 1rem;
+	background: rgba(34, 197, 94, 0.1);
+	border: 1px solid #22c55e;
+	border-radius: 6px;
+	color: #22c55e;
+	font-size: 0.875rem;
+}
+
+/* Oculta aviso de PayPal no configurado en producción */
+.pms-paygates-holder {
+	margin-top: 1rem;
+	font-size: 0.8rem;
+	color: var(--wp--preset--color--secondary);
+}
+
+#pms_login label:not(.login-remember label), #pms-subscription-plans-discount > label, .pms-field:not(.pms-gdpr-field, .pms-email-marketing-field, .pms-billing-toggle) > label {
+	color: white;
 }
