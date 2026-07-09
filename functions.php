@@ -283,14 +283,9 @@ function nch_user_has_active_subscription( int $user_id ): bool {
 }
 
 function nch_get_pms_subscriptions( int $user_id ): array {
-	// PMS 3.x — acepta array de args
 	if ( function_exists( 'pms_get_member_subscriptions' ) ) {
 		$subs = pms_get_member_subscriptions( [ 'user_id' => $user_id ] );
-		if ( is_array( $subs ) && ! empty( $subs ) ) return $subs;
-
-		// PMS 2.x — acepta user_id directo
-		$subs = pms_get_member_subscriptions( $user_id );
-		if ( is_array( $subs ) && ! empty( $subs ) ) return $subs;
+		if ( is_array( $subs ) ) return $subs;
 	}
 
 	// Fallback: consulta directa a la tabla de PMS
